@@ -1,18 +1,15 @@
 import express from 'express';
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = 8000;
 
 app.use(express.json());
 
 app.post('/devast', (req, res) => {
-  console.log('Получен webhook:', req.body);
+  console.log('Получен запрос:', req.body);
 
-  // Пример ответа (пустой список команд)
-  res.json({
-    type: "commands",
-    content: []
-  });
+  // Отвечаем, чтобы игра не «ложилась»
+  res.json({ type: 'commands', content: [] });
 });
 
 app.listen(PORT, () => {
