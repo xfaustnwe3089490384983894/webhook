@@ -1,18 +1,33 @@
-import express from 'express';
+const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+const PORT = process.env.PORT || 8000; // Railway сам назначает порт
 
-app.use(express.json());
+app.use(bodyParser.json());
 
+// Обработчик POST /devast
 app.post('/devast', (req, res) => {
-  console.log('Получен запрос:', req.body);
+  console.log('Получен запрос от Devast.io:', req.body);
 
-  // Отвечаем, чтобы игра не «ложилась»
-  res.json({ type: 'commands', content: [] });
+  // Пример ответа (можно менять)
+  const response = {
+    type: "commands",
+    content: [
+      "!message-to=1:Привет с Railway!",
+      "!add-data=1:[test]:Hello_World" // Пример добавления данных игроку
+    ]
+  };
+
+  res.json(response);
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Сервер слушает порт ${PORT}`);
+// Проверка работоспособности (корневой маршрут)
+app.get('/', (req, res) => {
+  res.send('Devast.io Webhook Server is running!');
+});
+
+// Запуск сервера
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Сервер запущен на порту ${PORT}`);
 });
