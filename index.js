@@ -1,24 +1,17 @@
-import express from "express";
-
+const express = require('express');
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  console.log("📥 GET /");
-  res.status(200).send("OK");
+app.post('/devast', (req, res) => {
+  console.log('📥 Новый POST запрос на /devast:', req.body);
+  res.json({ type: "commands", content: [] });
 });
 
-app.post("/devast", (req, res) => {
-  const body = req.body;
-  console.log("📥 Новый запрос на /devast:", JSON.stringify(body, null, 2));
-
-  // Пример простого ответа:
-  res.json({
-    type: "commands",
-    content: ["!pong"]
-  });
+app.get('/', (req, res) => {
+  res.send('Сервер работает!');
 });
 
 app.listen(PORT, () => {
