@@ -1,12 +1,13 @@
 {
   "name": "devast-webhook-server",
   "version": "1.0.0",
+  "description": "Webhook server for Devast game",
   "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.18.2"
   }
 }
